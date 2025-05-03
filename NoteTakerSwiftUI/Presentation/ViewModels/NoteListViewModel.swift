@@ -31,4 +31,9 @@ class NoteListViewModel: ObservableObject {
             .store(in: &cancellables)
         
     }
+    
+    func deleteNote(at index: Int) {
+        let noteId = filteredNotes[index].id
+        repository.deleteNote(withId: noteId)
+    }
 }

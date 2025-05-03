@@ -51,6 +51,13 @@ class NoteRepository: NoteRepositoryProtocol {
         }
     }
     
+    func deleteNote(withId id: UUID) {
+        if let index = notes.firstIndex(where: { $0.id == id }) {
+            notes.remove(at: index)
+            saveNotes()
+        }
+    }
+    
     private func loadNotes() {
         do {
             notes = try storage.load(forKey: storageKey)

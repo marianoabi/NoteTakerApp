@@ -28,6 +28,9 @@ struct NoteListView: View {
                             selectedNote = note
                         }
                 }
+                .onDelete { indexSet in
+                    indexSet.forEach { viewModel.deleteNote(at: $0) }
+                }
             }
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Notes")
