@@ -11,7 +11,7 @@ import SwiftUI
 struct NoteTakerSwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
-            NoteListView()
+            NoteListView(factory: ViewModelFactory(repository: NoteRepository(storage: UserDefaultsStorage())))
         }
     }
 }

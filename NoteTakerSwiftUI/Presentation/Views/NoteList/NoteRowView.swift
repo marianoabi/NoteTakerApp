@@ -8,26 +8,29 @@
 import SwiftUI
 
 struct NoteRowView: View {
+    let note: Note
+    let dateFormatter: DateFormatterServiceProtocol
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Hello Jaden")
+            Text(note.title)
                 .font(.headline)
                 .lineLimit(1)
             
-            Text("Mommy is cooking dinner")
+            Text(note.content)
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .lineLimit(2)
             
             HStack {
-                Text("May 2, 2025")
+                Text(dateFormatter.formatDate(note.dateModified))
                     .font(.caption)
                     .foregroundStyle(.gray)
                 
                 Spacer()
                 
                 Circle()
-                    .fill(.blue)
+                    .fill(note.color.color)
                     .frame(width: 12, height: 12)
             }
         }
@@ -36,5 +39,5 @@ struct NoteRowView: View {
 }
 
 #Preview {
-    NoteRowView()
+    NoteRowView(note: Note(title: "What's up?", content: "Doing something", dateCreated: Date(), dateModified: Date()), dateFormatter: DateFormatterService())
 }
