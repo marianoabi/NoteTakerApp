@@ -28,7 +28,7 @@ struct NoteListView: View {
             }
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Notes")
-            .toolbar(content: {
+            .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
                         
@@ -36,7 +36,8 @@ struct NoteListView: View {
                         Image(systemName: "plus")
                     }
                 }
-            })
+            }
+            .searchable(text: $viewModel.searchText, prompt: "Search notes")
         }
     }
 }
