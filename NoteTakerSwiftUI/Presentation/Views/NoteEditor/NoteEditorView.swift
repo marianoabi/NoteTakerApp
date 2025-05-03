@@ -9,35 +9,39 @@
 import SwiftUI
 
 struct NoteEditorView: View {
+    @ObservedObject var viewModel: NoteEditorViewModel
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Title")) {
-                    TextField("Note title", text: .constant(""))
+                    TextField("Note title", text: $viewModel.title)
                 }
                 
                 Section(header: Text("Content")) {
-                    TextField("Note content", text: .constant(""))
+                    TextField("Note content", text: $viewModel.content)
                         .frame(minHeight: 200)
                 }
                 
                 Section(header: Text("Color")) {
-                    ColorPickerView()
+                    ColorPickerView(selectedColor: $viewModel.selectedColor)
                 }
             }
-            .navigationTitle("New Note")
+            .navigationTitle(viewModel.isNewNote ? "New Note" : "Edit Note")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Cancel") {
-                        
+                        presentationMode.wrappedValue.dismiss()
                     }
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Save") {
-                        
+                        viewModel.saveNote()
+                        presentationMode.wrappedValue.dismiss()
                     }
-                    .disabled(true)
+                    .disabled(viewModel.title.isEmpty)
                 }
             }
         }
@@ -45,5 +49,5 @@ struct NoteEditorView: View {
 }
 
 #Preview {
-    NoteEditorView()
+    NoteEditorView(viewModel: NoteEditorViewModel(repository: NoteRepository(storage: UserDefaultsStorage())))
 }

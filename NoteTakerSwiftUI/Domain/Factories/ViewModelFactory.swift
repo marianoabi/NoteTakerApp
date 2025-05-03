@@ -22,6 +22,10 @@ class ViewModelFactory: ViewModelFactoryProtocol {
         return NoteListViewModel(repository: repository)
     }
     
+    func makeNoteEditorViewModel(note: Note?) -> NoteEditorViewModel {
+        return NoteEditorViewModel(repository: repository, note: note)
+    }
+    
     func makeDateFormatterService() -> DateFormatterServiceProtocol {
         return DateFormatterService()
     }

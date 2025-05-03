@@ -24,6 +24,9 @@ struct NoteListView: View {
             List {
                 ForEach(viewModel.filteredNotes) { note in
                     NoteRowView(note: note, dateFormatter: factory.makeDateFormatterService())
+                        .onTapGesture {
+                            selectedNote = note
+                        }
                 }
             }
             .listStyle(InsetGroupedListStyle())
@@ -31,13 +34,19 @@ struct NoteListView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
-                        
+                        showingNewNoteView = true
                     }) {
                         Image(systemName: "plus")
                     }
                 }
             }
             .searchable(text: $viewModel.searchText, prompt: "Search notes")
+            .sheet(isPresented: $showingNewNoteView) {
+                NoteEditorView(viewModel: factory.makeNoteEditorViewModel(note: nil))
+            }
+            .sheet(item: $selectedNote) { note in
+                NoteEditorView(viewModel: factory.makeNoteEditorViewModel(note: note))
+            }
         }
     }
 }

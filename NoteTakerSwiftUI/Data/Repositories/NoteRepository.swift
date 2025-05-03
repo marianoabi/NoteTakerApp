@@ -44,6 +44,13 @@ class NoteRepository: NoteRepositoryProtocol {
         try? storage.save(notes, forKey: storageKey)
     }
     
+    func updateNote(_ note: Note) {
+        if let index = notes.firstIndex(where: { $0.id == note.id }) {
+            notes[index] = note
+            saveNotes()
+        }
+    }
+    
     private func loadNotes() {
         do {
             notes = try storage.load(forKey: storageKey)

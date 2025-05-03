@@ -13,4 +13,5 @@ protocol NoteRepositoryProtocol {
     func getAllNotes() -> [Note]
     func addNote(_ note: Note)
     func searchNotes(searchText: String) -> [Note]
+    func updateNote(_ note: Note)
 }
