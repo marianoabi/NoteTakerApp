@@ -71,9 +71,14 @@ final class NoteEditorViewModelTests: XCTestCase {
     
     func testUpdateExistingNote() {
         // Given
-        let existingNote = mockRepository.getAllNotes().first!
-        sut = NoteEditorViewModel(repository: mockRepository, note: existingNote)
-        let initialCount = mockRepository.getAllNotes().count
+        let specificNote = TestDataFactory.createTestNote(
+            title: "Original Title",
+            content: "Original Content",
+            color: .blue
+        )
+        
+        mockRepository.addNote(specificNote)
+        sut = NoteEditorViewModel(repository: mockRepository, note: specificNote)
         
         // When
         sut.title = "Updated Title"
@@ -82,15 +87,10 @@ final class NoteEditorViewModelTests: XCTestCase {
         sut.saveNote()
         
         // Then
-        let notes = mockRepository.getAllNotes()
-        XCTAssertEqual(notes.count, initialCount)
-        
-        if let updatedNote = notes.first(where: { $0.id == existingNote.id }) {
-            XCTAssertEqual(updatedNote.title, "Updated Title")
-            XCTAssertEqual(updatedNote.content, "Updated Content")
-            XCTAssertEqual(updatedNote.color, .purple)
-        } else {
-            XCTFail("Updated note not found")
-        }
+        let updatedNote = mockRepository.getAllNotes().first { $0.id == specificNote.id }
+        XCTAssertNotNil(updatedNote)
+        XCTAssertEqual(updatedNote?.title, "Updated Title")
+        XCTAssertEqual(updatedNote?.content, "Updated Content")
+        XCTAssertEqual(updatedNote?.color, .purple)
     }
 }

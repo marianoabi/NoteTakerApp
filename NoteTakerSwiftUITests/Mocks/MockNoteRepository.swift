@@ -10,13 +10,13 @@ import Combine
 @testable import NoteTakerSwiftUI
 
 class MockNoteRepository: NoteRepositoryProtocol {
-    @Published private var notes: [Note] = [
-        Note(title: "Welcome to Notes App", content: "This is a sample note", dateCreated: Date(), dateModified: Date()),
-        Note(title: "Shopping List", content: "Milk, Eggs, Bread", dateCreated: Date(), dateModified: Date()),
-        Note(title: "Project Ideas", content: "Learn SwiftUI", dateCreated: Date(), dateModified: Date())
-    ]
+    @Published private var notes: [Note]
     
     var notesPublisher: Published<[NoteTakerSwiftUI.Note]>.Publisher { $notes }
+    
+    init(initialNotes: [Note]? = nil) {
+        self.notes = initialNotes ?? TestDataFactory.createTestNotes()
+    }
     
     func getAllNotes() -> [NoteTakerSwiftUI.Note] {
         return notes

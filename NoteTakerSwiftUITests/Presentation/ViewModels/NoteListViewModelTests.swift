@@ -17,7 +17,13 @@ final class NoteListViewModelTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        mockRepository = MockNoteRepository()
+        let testNotes = [
+            TestDataFactory.createTestNote(title: "Project Alpha", content: "Details about Project Alpha"),
+            TestDataFactory.createTestNote(title: "Meeting Notes", content: "Project Beta discussion"),
+            TestDataFactory.createTestNote(title: "Shopping List", content: "Items to buy")
+        ]
+        
+        mockRepository = MockNoteRepository(initialNotes: testNotes)
         sut = NoteListViewModel(repository: mockRepository)
         cancellables = []
     }
@@ -36,22 +42,22 @@ final class NoteListViewModelTests: XCTestCase {
     }
     
     func testFilteringWithSearchText() {
-        // Given
-        let expectation = XCTestExpectation(description: "Filtering notes")
+        // Given - Known test data with "Project" in the title and content
         
         // When
         sut.searchText = "Project"
         
-        // Then
-        sut.$filteredNotes
-            .dropFirst() // Skip initial value
-            .sink { notes in
-                XCTAssertEqual(notes.count, 1)
-                XCTAssertEqual(notes.first?.title, "Project Ideas")
-                expectation.fulfill()
-            }
-            .store(in: &cancellables)
+        // Force a small delay to allow the Combine pipeline to process
+        let expectation = XCTestExpectation(description: "Filtering notes")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            expectation.fulfill()
+        }
         wait(for: [expectation], timeout: 1.0)
+        
+        // Then - we know exactly which notes should match
+        XCTAssertEqual(sut.filteredNotes.count, 2)
+        XCTAssertTrue(sut.filteredNotes.contains(where: { $0.title == "Project Alpha" }))
+        XCTAssertTrue(sut.filteredNotes.contains(where: { $0.content.contains("Project Beta") }))
     }
     
     func testDeleteNote() {
