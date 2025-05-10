@@ -24,4 +24,19 @@ enum NoteColor: String, Codable, CaseIterable {
             return .purple
         }
     }
+    
+    var accessibilityDescription: String {
+        switch self {
+        case .blue:
+            return "Blue"
+        case .red:
+            return "Red"
+        case .green:
+            return "Green"
+        case .yellow:
+            return "Yellow"
+        case .purple:
+            return "Purple"
+        }
+    }
 }

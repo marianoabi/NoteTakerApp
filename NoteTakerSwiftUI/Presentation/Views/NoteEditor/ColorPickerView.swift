@@ -22,9 +22,14 @@ struct ColorPickerView: View {
                                 .padding(2)
                         )
                         .onTapGesture(perform: { selectedColor = color })
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel("\(color.accessibilityDescription) color")
+                        .accessibilityAddTraits(selectedColor == color ? .isSelected : [])
+                        .accessibilityHint("Double tap to select this color for your note")
                 }
             }
         }
+        .accessibilityLabel("Color selector")
     }
 }
 

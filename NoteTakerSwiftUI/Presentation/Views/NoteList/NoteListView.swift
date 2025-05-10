@@ -44,6 +44,9 @@ struct NoteListView: View {
                 }
             }
             .searchable(text: $viewModel.searchText, prompt: "Search notes")
+            .accessibilityAction(named: "Create New Note", {
+                showingNewNoteView = true
+            })
             .sheet(isPresented: $showingNewNoteView) {
                 NoteEditorView(viewModel: factory.makeNoteEditorViewModel(note: nil))
             }

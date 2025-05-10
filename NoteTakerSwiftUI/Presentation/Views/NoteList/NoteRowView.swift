@@ -35,6 +35,10 @@ struct NoteRowView: View {
             }
         }
         .padding(.vertical, 4)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Note: \(note.title)")
+        .accessibilityHint("Double tap to edit this note")
+        .accessibilityValue(Text("Last modified \(dateFormatter.formatDate(note.dateModified)). Content: \(note.content)"))
     }
 }
 

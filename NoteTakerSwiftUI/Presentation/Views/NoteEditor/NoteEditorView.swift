@@ -17,15 +17,21 @@ struct NoteEditorView: View {
             Form {
                 Section(header: Text("Title")) {
                     TextField("Note title", text: $viewModel.title)
+                        .accessibilityLabel("Note Title")
+                        .accessibilityHint("Enter the title for your note")
                 }
                 
                 Section(header: Text("Content")) {
                     TextField("Note content", text: $viewModel.content)
                         .frame(minHeight: 200)
+                        .accessibilityLabel("Note content")
+                        .accessibilityHint("Enter the content for your note")
                 }
                 
                 Section(header: Text("Color")) {
                     ColorPickerView(selectedColor: $viewModel.selectedColor)
+                        .accessibilityLabel("Note color")
+                        .accessibilityHint("Select a color for your note")
                 }
             }
             .navigationTitle(viewModel.isNewNote ? "New Note" : "Edit Note")
@@ -34,6 +40,8 @@ struct NoteEditorView: View {
                     Button("Cancel") {
                         presentationMode.wrappedValue.dismiss()
                     }
+                    .accessibilityLabel("Cancel")
+                    .accessibilityHint("Discard changes and return to notes list")
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
@@ -42,6 +50,8 @@ struct NoteEditorView: View {
                         presentationMode.wrappedValue.dismiss()
                     }
                     .disabled(viewModel.title.isEmpty)
+                    .accessibilityLabel("Save note")
+                    .accessibilityHint(viewModel.title.isEmpty ? "Button is disabled, add a title to enable" : "Save your note and return to notes list")
                 }
             }
         }
