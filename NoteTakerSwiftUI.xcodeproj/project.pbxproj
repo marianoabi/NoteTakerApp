@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		FC6B53302DCF80A900691A37 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC6B532F2DCF80A900691A37 /* SwiftUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		FCD309AB2DCB6E3900271401 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -18,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		FC2A7C362DC3DFDE004E55B2 /* NoteTakerSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteTakerSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC6B532F2DCF80A900691A37 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk/System/iOSSupport/System/Library/Frameworks/SwiftUI.framework; sourceTree = DEVELOPER_DIR; };
 		FCD309A72DCB6E3900271401 /* NoteTakerSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoteTakerSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -46,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC6B53302DCF80A900691A37 /* SwiftUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +63,7 @@
 			children = (
 				FC2A7C382DC3DFDE004E55B2 /* NoteTakerSwiftUI */,
 				FCD309A82DCB6E3900271401 /* NoteTakerSwiftUITests */,
+				FC6B532E2DCF80A900691A37 /* Frameworks */,
 				FC2A7C372DC3DFDE004E55B2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,6 +75,14 @@
 				FCD309A72DCB6E3900271401 /* NoteTakerSwiftUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FC6B532E2DCF80A900691A37 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC6B532F2DCF80A900691A37 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,6 +161,8 @@
 			);
 			mainGroup = FC2A7C2D2DC3DFDE004E55B2;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = FC2A7C372DC3DFDE004E55B2 /* Products */;
 			projectDirPath = "";
