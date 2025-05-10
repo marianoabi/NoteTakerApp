@@ -20,14 +20,17 @@ class NoteListViewModel: ObservableObject {
         
         repository.notesPublisher
             .combineLatest($searchText)
-            .map { notes, searchText in
+            .map { [weak self] notes, searchText in
+                guard let self = self else { return [] }
                 if searchText.isEmpty {
                     return notes
                 } else {
                     return self.repository.searchNotes(searchText: searchText)
                 }
             }
-            .assign(to: \.filteredNotes, on: self)
+            .sink(receiveValue: { [weak self] value in
+                self?.filteredNotes = value
+            })
             .store(in: &cancellables)
         
     }
@@ -35,5 +38,11 @@ class NoteListViewModel: ObservableObject {
     func deleteNote(at index: Int) {
         let noteId = filteredNotes[index].id
         repository.deleteNote(withId: noteId)
+    }
+    
+    deinit {
+        print("NoteListViewModel deallocated")
+        cancellables.forEach { $0.cancel() }
+        cancellables.removeAll()
     }
 }

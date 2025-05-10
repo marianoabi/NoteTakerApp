@@ -16,7 +16,7 @@ struct NoteListView: View {
     
     init(factory: ViewModelFactory) {
         self.factory = factory
-        _viewModel = .init(wrappedValue: factory.makeNoteListViewModel())
+        _viewModel = StateObject(wrappedValue: factory.makeNoteListViewModel())
     }
     
     var body: some View {

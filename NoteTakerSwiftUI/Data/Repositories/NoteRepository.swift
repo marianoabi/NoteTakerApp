@@ -20,6 +20,10 @@ class NoteRepository: NoteRepositoryProtocol {
         loadNotes()
     }
     
+    deinit {
+        print("NoteRepository deallocated")
+    }
+    
     func getAllNotes() -> [Note] {
         return notes
     }
