@@ -31,6 +31,7 @@ class NoteRepository: NoteRepositoryProtocol {
     
     func addNote(_ note: Note) {
         notes.insert(note, at: 0)
+        saveNotes()
     }
     
     func searchNotes(searchText: String) -> [Note] {
