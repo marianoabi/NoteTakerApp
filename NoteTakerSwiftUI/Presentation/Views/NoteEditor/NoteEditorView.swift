@@ -33,7 +33,7 @@ struct NoteEditorView: View {
                 }
                 
                 Section(header: Text("Color")) {
-                    ColorPickerView(selectedColor: $viewModel.selectedColor)
+                    ColorPickerView(selectedColor: $viewModel.selectedColor, isPremiumUser: viewModel.isPremiumUser)
                         .accessibilityLabel("Note color")
                         .accessibilityHint("Select a color for your note")
                 }
@@ -63,5 +63,5 @@ struct NoteEditorView: View {
 }
 
 #Preview {
-    NoteEditorView(viewModel: NoteEditorViewModel(repository: NoteRepository(storage: UserDefaultsStorage())))
+    NoteEditorView(viewModel: NoteEditorViewModel(repository: NoteRepository(storage: UserDefaultsStorage()), iapService: IAPService()))
 }

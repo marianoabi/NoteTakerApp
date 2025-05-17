@@ -8,7 +8,12 @@
 import SwiftUI
 
 enum NoteColor: String, Codable, CaseIterable {
-    case blue, red, green, yellow, purple
+    
+    // basic colors
+    case blue, red, green, yellow
+    
+    // premium
+    case orange, pink, teal, indigo, brown
     
     var color: Color {
         switch self {
@@ -20,8 +25,16 @@ enum NoteColor: String, Codable, CaseIterable {
             return .green
         case .yellow:
             return .yellow
-        case .purple:
-            return .purple
+        case .orange:
+            return .orange
+        case .pink:
+            return .pink
+        case .teal:
+            return .teal
+        case .indigo:
+            return .indigo
+        case .brown:
+            return .brown
         }
     }
     
@@ -35,8 +48,33 @@ enum NoteColor: String, Codable, CaseIterable {
             return "Green"
         case .yellow:
             return "Yellow"
-        case .purple:
-            return "Purple"
+        case .orange:
+            return "Orange"
+        case .pink:
+            return "Pink"
+        case .teal:
+            return "Teal"
+        case .indigo:
+            return "Indigo"
+        case .brown:
+            return "Brown"
         }
+    }
+    
+    var isPremium: Bool {
+        switch self {
+        case .blue, .red, .green, .yellow:
+            return false
+        case .orange, .pink, .teal, .indigo, .brown:
+            return true
+        }
+    }
+    
+    static var basicColors: [NoteColor] {
+        return [.blue, .red, .green, .yellow]
+    }
+    
+    static var premiumColors: [NoteColor] {
+        return [.orange, .pink, .teal, .indigo, .brown]
     }
 }
