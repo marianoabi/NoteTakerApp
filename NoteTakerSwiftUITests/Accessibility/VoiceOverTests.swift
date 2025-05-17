@@ -1,5 +1,5 @@
 //
-//  VoiceOverAccessibilityTests.swift
+//  VoiceOverTests.swift
 //  NoteTakerSwiftUITests
 //
 //  Created by Abigail Mariano on 5/10/25.
@@ -9,7 +9,7 @@ import XCTest
 @testable import NoteTakerSwiftUI
 import SwiftUI
 
-final class VoiceOverAccessibilityTests: XCTestCase {
+final class VoiceOverTests: XCTestCase {
     
     func testNoteAccessibilityHelper() {
         // Given

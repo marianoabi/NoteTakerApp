@@ -17,12 +17,16 @@ struct NoteEditorView: View {
             Form {
                 Section(header: Text("Title")) {
                     TextField("Note title", text: $viewModel.title)
+                        .font(.system(size: 17)) // Use system font for text field
+                        .dynamicTypeSize(.xSmall ... .accessibility5)
                         .accessibilityLabel("Note Title")
                         .accessibilityHint("Enter the title for your note")
                 }
                 
                 Section(header: Text("Content")) {
                     TextField("Note content", text: $viewModel.content)
+                        .font(.system(size: 17)) // Use system font for text field
+                        .dynamicTypeSize(.xSmall ... .accessibility5)
                         .frame(minHeight: 200)
                         .accessibilityLabel("Note content")
                         .accessibilityHint("Enter the content for your note")
