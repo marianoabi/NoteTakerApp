@@ -9,4 +9,6 @@ import Foundation
 
 protocol ViewModelFactoryProtocol {
     func makeNoteListViewModel() -> NoteListViewModel
+    func makeNoteEditorViewModel(note: Note?) -> NoteEditorViewModel
+    func makeDateFormatterService() -> DateFormatterServiceProtocol
 }
