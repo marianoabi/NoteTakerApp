@@ -67,7 +67,7 @@ struct ProductCardView: View {
                     
                     if !isPurchased {
                         Spacer()
-                        Image(systemName: "arrow.righrt")
+                        Image(systemName: "arrow.right")
                     }
                 }
                 .padding()
