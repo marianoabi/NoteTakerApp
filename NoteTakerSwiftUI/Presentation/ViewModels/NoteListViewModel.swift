@@ -13,19 +13,19 @@ class NoteListViewModel: ObservableObject {
     @Published var searchText: String = ""
     
     private var cancellables = Set<AnyCancellable>()
-    private let repository: NoteRepositoryProtocol
+    private let useCase: NoteUseCaseProtocol
     
-    init(repository: NoteRepositoryProtocol) {
-        self.repository = repository
+    init(useCase: NoteUseCaseProtocol) {
+        self.useCase = useCase
         
-        repository.notesPublisher
+        useCase.notesPublisher
             .combineLatest($searchText)
             .map { [weak self] notes, searchText in
                 guard let self = self else { return [] }
                 if searchText.isEmpty {
                     return notes
                 } else {
-                    return self.repository.searchNotes(searchText: searchText)
+                    return self.useCase.searchNotes(searchText: searchText)
                 }
             }
             .sink(receiveValue: { [weak self] value in
@@ -37,7 +37,7 @@ class NoteListViewModel: ObservableObject {
     
     func deleteNote(at index: Int) {
         let noteId = filteredNotes[index].id
-        repository.deleteNote(withId: noteId)
+        useCase.deleteNote(withId: noteId)
     }
     
     deinit {

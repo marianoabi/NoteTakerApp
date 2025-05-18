@@ -63,5 +63,5 @@ struct NoteEditorView: View {
 }
 
 #Preview {
-    NoteEditorView(viewModel: NoteEditorViewModel(repository: NoteRepository(storage: UserDefaultsStorage()), iapService: IAPService()))
+    NoteEditorView(viewModel: NoteEditorViewModel(useCase: NoteUseCase(repository: NoteRepository(storage: UserDefaultsStorage())), iapService: IAPService()))
 }

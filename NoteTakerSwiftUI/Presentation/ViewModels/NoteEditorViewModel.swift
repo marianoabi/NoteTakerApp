@@ -14,7 +14,7 @@ class NoteEditorViewModel: ObservableObject {
     @Published var selectedColor: NoteColor
     @Published var isPremiumUser: Bool = false
     
-    private let repository: NoteRepositoryProtocol
+    private let useCase: NoteUseCaseProtocol
     private let iapService: IAPServiceProtocol
     private let noteId: UUID?
     private let dateCreated: Date
@@ -24,8 +24,8 @@ class NoteEditorViewModel: ObservableObject {
         return noteId == nil
     }
     
-    init(repository: NoteRepositoryProtocol, iapService: IAPServiceProtocol, note: Note? = nil) {
-        self.repository = repository
+    init(useCase: NoteUseCaseProtocol, iapService: IAPServiceProtocol, note: Note? = nil) {
+        self.useCase = useCase
         self.iapService = iapService
         self.title = note?.title ?? ""
         self.content = note?.content ?? ""
@@ -47,11 +47,9 @@ class NoteEditorViewModel: ObservableObject {
         }
         
         if isNewNote {
-            let newNote = Note(title: title, content: content, dateCreated: Date(), dateModified: Date(), color: selectedColor)
-            repository.addNote(newNote)
+            _ = useCase.addNote(title: title, content: content, color: selectedColor)
         } else if let id = noteId {
-            let updateNote = Note(id: id,title: title, content: content, dateCreated: dateCreated, dateModified: Date(), color: selectedColor)
-            repository.updateNote(updateNote)
+            useCase.updateNote(id: id,title: title, content: content, color: selectedColor)
         }
     }
 }

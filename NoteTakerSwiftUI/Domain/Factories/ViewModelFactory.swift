@@ -10,6 +10,7 @@ import Foundation
 class ViewModelFactory: ViewModelFactoryProtocol {
     private let repository: NoteRepositoryProtocol
     private let iapService: IAPServiceProtocol
+    private let useCase: NoteUseCaseProtocol
     
     init(repository: NoteRepositoryProtocol? = nil, iapService: IAPServiceProtocol? = nil) {
         if let repo = repository {
@@ -23,14 +24,16 @@ class ViewModelFactory: ViewModelFactoryProtocol {
         } else {
             self.iapService = IAPService()
         }
+        
+        self.useCase = NoteUseCase(repository: self.repository)
     }
     
     func makeNoteListViewModel() -> NoteListViewModel {
-        return NoteListViewModel(repository: repository)
+        return NoteListViewModel(useCase: useCase)
     }
     
     func makeNoteEditorViewModel(note: Note?) -> NoteEditorViewModel {
-        return NoteEditorViewModel(repository: repository, iapService: iapService, note: note)
+        return NoteEditorViewModel(useCase: useCase, iapService: iapService, note: note)
     }
     
     func makeDateFormatterService() -> DateFormatterServiceProtocol {
