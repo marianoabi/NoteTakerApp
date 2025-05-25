@@ -13,7 +13,7 @@ struct NoteTakerSwiftUIApp: App {
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
     
     let factory = ViewModelFactory(
-        repository: NoteRepository(storage: UserDefaultsStorage()),
+        repository: NoteRepository(storage: CoreDataStorage(), ),
         iapService: IAPService()
     )
     
@@ -35,6 +35,7 @@ struct NoteTakerSwiftUIApp: App {
                         Label("Store", systemImage: "bag")
                     }
             }
+            .environment(\.managedObjectContext, CoreDataStack.shared.viewContext)
         }
     }
 }
