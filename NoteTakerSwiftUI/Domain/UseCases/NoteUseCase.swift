@@ -14,6 +14,10 @@ class NoteUseCase: NoteUseCaseProtocol {
         self.repository = repository
     }
     
+    deinit {
+        print(StringConstants.App.dealloc.formatted(with: String(describing: Self.self)))
+    }
+    
     var notesPublisher: Published<[Note]>.Publisher {
         return repository.notesPublisher
     }

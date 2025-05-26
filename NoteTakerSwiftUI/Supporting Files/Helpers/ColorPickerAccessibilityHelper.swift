@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ColorPickerAccessibilityHelper {
     static func containerLabel() -> String {
-        return "Color selector"
+        return StringConstants.Accessibility.colorSelector
     }
     
     static func colorLabel(for color: NoteColor) -> String {
@@ -17,6 +17,6 @@ struct ColorPickerAccessibilityHelper {
     }
     
     static func colorHint() -> String {
-        return "Double tap to select this color for your note"
+        return StringConstants.Accessibility.colorHint
     }
 }

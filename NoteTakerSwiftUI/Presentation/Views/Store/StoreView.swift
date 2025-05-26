@@ -20,12 +20,12 @@ struct StoreView: View {
             ScrollView {
                 VStack(spacing: 20) {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Premium Features")
+                        Text(StringConstants.Store.title)
                             .font(.title)
                             .fontWeight(.bold)
                             .padding(.horizontal)
                         
-                        Text("Enhance your note-taking experience")
+                        Text(StringConstants.Store.subtitle2)
                             .font(.subheadline)
                             .foregroundStyle(Color.secondary)
                             .padding(.horizontal)
@@ -56,7 +56,7 @@ struct StoreView: View {
                         ProgressView()
                             .padding()
                     } else if viewModel.productViewModels.isEmpty {
-                        Text("No products available")
+                        Text(StringConstants.Store.noProducts)
                             .foregroundStyle(Color.secondary)
                             .padding()
                     } else {
@@ -78,7 +78,7 @@ struct StoreView: View {
                         .multilineTextAlignment(.center)
                 }
                 
-                Button("Restore Purchases") {
+                Button(StringConstants.Store.restorePurchases) {
                     Task {
                         await viewModel.restorePurchases()
                     }
@@ -87,7 +87,7 @@ struct StoreView: View {
                 .foregroundStyle(Color.blue)
             }
         }
-        .navigationTitle("Store")
+        .navigationTitle(StringConstants.Store.navigationTitle)
         .refreshable {
             await viewModel.loadProducts()
         }

@@ -27,12 +27,12 @@ struct NoteTakerSwiftUIApp: App {
                          dynamicTypeSize.isAccessibilitySize ? 80 : 44
                     )
                     .tabItem {
-                        Label("Notes", systemImage: "note.text")
+                        Label(StringConstants.Tab.firstTab, systemImage: "note.text")
                     }
                 
                 StoreView(factory: factory)
                     .tabItem {
-                        Label("Store", systemImage: "bag")
+                        Label(StringConstants.Tab.secondTab, systemImage: "bag")
                     }
             }
             .environment(\.managedObjectContext, CoreDataStack.shared.viewContext)

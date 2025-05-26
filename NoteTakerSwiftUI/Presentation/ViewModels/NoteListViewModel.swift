@@ -41,7 +41,7 @@ class NoteListViewModel: ObservableObject {
     }
     
     deinit {
-        print("NoteListViewModel deallocated")
+        print(StringConstants.App.dealloc.formatted(with: String(describing: Self.self)))
         cancellables.forEach { $0.cancel() }
         cancellables.removeAll()
     }

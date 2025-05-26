@@ -20,4 +20,8 @@ class DateFormatterService: DateFormatterServiceProtocol {
     func formatDate(_ date: Date) -> String {
         return dateFormatter.string(from: date)
     }
+    
+    deinit {
+        print(StringConstants.App.dealloc.formatted(with: String(describing: Self.self)))
+    }
 }

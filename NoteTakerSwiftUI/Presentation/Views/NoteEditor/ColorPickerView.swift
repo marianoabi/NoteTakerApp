@@ -12,7 +12,7 @@ struct ColorPickerView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Standard Colors")
+            Text(StringConstants.UI.standardColors)
                 .font(.caption)
                 .foregroundStyle(Color.secondary)
             
@@ -35,13 +35,13 @@ struct ColorPickerView: View {
                     }
                 }
             }
-            .accessibilityLabel("Color selector")
+            .accessibilityLabel(StringConstants.Accessibility.colorSelector)
             
             Divider()
                 .padding(.vertical, 8)
             
             HStack {
-                Text("Premium Colors")
+                Text(StringConstants.UI.premiumColors)
                     .font(.caption)
                     .foregroundStyle(Color.secondary)
                 
@@ -49,7 +49,7 @@ struct ColorPickerView: View {
                     Spacer()
                     
                     NavigationLink(destination: StorePlaceholderView()) {
-                        Label("Unlock", systemImage: "lock")
+                        Label(StringConstants.UI.unlock, systemImage: "lock")
                             .font(.caption)
                             .foregroundStyle(Color.blue)
                     }

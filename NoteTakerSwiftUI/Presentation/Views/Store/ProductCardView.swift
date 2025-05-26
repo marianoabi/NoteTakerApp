@@ -17,11 +17,11 @@ struct ProductCardView: View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Premium Features")
+                    Text(StringConstants.Store.title)
                         .font(.headline)
                         .fontWeight(.bold)
                     
-                    Text("Unlock all premium features")
+                    Text(StringConstants.Store.subtitle)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -62,7 +62,7 @@ struct ProductCardView: View {
             
             Button(action: purchaseAction) {
                 HStack {
-                    Text(isPurchased ? "Purchased" : "Buy for \(productVM.formattedPrice)")
+                    Text(isPurchased ? StringConstants.Store.purchased : StringConstants.Store.buyFormat.formatted(with: productVM.formattedPrice))
                         .fontWeight(.semibold)
                     
                     if !isPurchased {

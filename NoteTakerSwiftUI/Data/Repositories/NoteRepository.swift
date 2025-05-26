@@ -13,7 +13,7 @@ class NoteRepository: NoteRepositoryProtocol {
     var notesPublisher: Published<[Note]>.Publisher { $notes }
     
     private let storage: StorageProtocol
-    private let storageKey = "savedNotes"
+    private let storageKey = StringConstants.StorageKeys.savedNotes
     
     init(storage: StorageProtocol) {
         self.storage = storage
@@ -21,7 +21,7 @@ class NoteRepository: NoteRepositoryProtocol {
     }
     
     deinit {
-        print("NoteRepository deallocated")
+        print(StringConstants.App.dealloc.formatted(with: String(describing: Self.self)))
     }
     
     func getAllNotes() -> [Note] {
@@ -76,9 +76,9 @@ class NoteRepository: NoteRepositoryProtocol {
     
     private func createSampleNotes() {
         notes = [
-            Note(title: "Welcome to Notes App", content: "This is a sample note to help you get started. Swipe left to delete or tap to edit", dateCreated: Date(), dateModified: Date(), color: .blue),
-            Note(title: "Shopping List", content: "- Milk\n- Eggs\n- Bread\n- Butter", dateCreated: Date(), dateModified: Date(), color: .yellow),
-            Note(title: "Project Ideas", content: "1. Learn SwiftUI\n2. Build portfolio app\n3. Update resumè", dateCreated: Date(), dateModified: Date(), color: .green)
+            Note(title: StringConstants.SampleNotes.welcomeTitle, content: StringConstants.SampleNotes.welcomeContent, dateCreated: Date(), dateModified: Date(), color: .blue),
+            Note(title: StringConstants.SampleNotes.shoppingTitle, content: StringConstants.SampleNotes.shoppingContent, dateCreated: Date(), dateModified: Date(), color: .yellow),
+            Note(title: StringConstants.SampleNotes.projectTitle, content: StringConstants.SampleNotes.projectContent, dateCreated: Date(), dateModified: Date(), color: .green)
         ]
         saveNotes()
     }

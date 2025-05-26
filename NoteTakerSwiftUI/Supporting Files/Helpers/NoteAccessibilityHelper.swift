@@ -13,7 +13,7 @@ struct NoteAccessibilityHelper {
     }
     
     static func hint() -> String {
-        return "Double tap to edit this note"
+        return StringConstants.Accessibility.noteTapHint
     }
     
     static func value(for note: Note, formattedDate: String) -> String {

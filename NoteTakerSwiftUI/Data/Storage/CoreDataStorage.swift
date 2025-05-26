@@ -15,12 +15,16 @@ class CoreDataStorage: StorageProtocol {
         self.coreDataStack = coreDataStack
     }
     
+    deinit {
+        print(StringConstants.App.dealloc.formatted(with: String(describing: Self.self)))
+    }
+    
     // MARK: - StorageProtocol
     
     func save<T>(_ items: [T], forKey key: String) throws where T : Encodable {
         guard let notes = items as? [Note] else {
-            throw NSError(domain: "com.marianoabi.NoteTakerSwiftUI", code: 1001,
-                          userInfo: [NSLocalizedDescriptionKey: "Cannot save items that are not Notes"])
+            throw NSError(domain: StringConstants.App.bundleID, code: 1001,
+                          userInfo: [NSLocalizedDescriptionKey: StringConstants.Error.saveNotes])
         }
         
         let context = coreDataStack.viewContext

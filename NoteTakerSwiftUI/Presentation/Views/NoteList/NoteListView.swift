@@ -40,7 +40,7 @@ struct NoteListView: View {
             .listStyle(InsetGroupedListStyle())
             // This is important - it makes the list cells respond to dynamic type changes
             .environment(\.defaultMinListRowHeight, rowHeight)
-            .navigationTitle("Notes")
+            .navigationTitle(StringConstants.UI.appTitle)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
@@ -53,8 +53,8 @@ struct NoteListView: View {
                     }
                 }
             }
-            .searchable(text: $viewModel.searchText, prompt: "Search notes")
-            .accessibilityAction(named: "Create New Note", {
+            .searchable(text: $viewModel.searchText, prompt: StringConstants.UI.searchNote)
+            .accessibilityAction(named: StringConstants.Accessibility.createNewNote, {
                 showingNewNoteView = true
             })
             .sheet(isPresented: $showingNewNoteView) {

@@ -11,11 +11,15 @@ import CoreData
 class CoreDataStack {
     static let shared = CoreDataStack()
     
+    deinit {
+        print(StringConstants.App.dealloc.formatted(with: String(describing: Self.self)))
+    }
+    
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "NoteTakerModel")
+        let container = NSPersistentContainer(name: StringConstants.App.coreDataModel)
         container.loadPersistentStores { _, error in
             if let error = error {
-                fatalError("Failed to load Core Data stack: \(error)")
+                fatalError(StringConstants.Error.CoreData.loadCoreDataStackFailed.formatted(with: error.localizedDescription))
             }
         }
         container.viewContext.automaticallyMergesChangesFromParent = true
@@ -34,7 +38,7 @@ class CoreDataStack {
                 try context.save()
             } catch {
                 let error = error as NSError
-                print("Unresolved Core Data error: \(error), \(error.userInfo)")
+                print(StringConstants.Error.CoreData.unresolved.formatted(with: error, error.userInfo))
             }
         }
     }

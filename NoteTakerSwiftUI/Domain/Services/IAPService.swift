@@ -19,7 +19,7 @@ class IAPService: IAPServiceProtocol {
     private var productIDs: Set<String>
     private var updateListenerTask: Task<Void, Error>?
     
-    init(productIDs: Set<String> = ["com.marianoabi.NoteTakerSwiftUI.premium.monthly"]) {
+    init(productIDs: Set<String> = [StringConstants.ProductIDs.premiumMonthly]) {
         self.productIDs = productIDs
         self.updateListenerTask = listenForTransactions()
         
@@ -30,6 +30,7 @@ class IAPService: IAPServiceProtocol {
     
     deinit {
         updateListenerTask?.cancel()
+        print(StringConstants.App.dealloc.formatted(with: String(describing: Self.self)))
     }
     
     func fetchProducts() async throws -> [Product] {
@@ -77,7 +78,7 @@ extension IAPService {
                     await self.updatePurchaseProducts()
                     await transaction.finish()
                 } catch {
-                    print("Transaction failed verification: \(error)")
+                    print(StringConstants.Error.transactionFailed.formatted(with: error.localizedDescription))
                 }
             }
         }
@@ -100,7 +101,7 @@ extension IAPService {
                 let transaction = try checkVerified(result)
                 purchaseIdentifiers.insert(transaction.productID)
             } catch {
-                print("Failed to verify transaction: \(error)")
+                print(StringConstants.Error.verficationFailed.formatted(with: error.localizedDescription))
             }
         }
         
